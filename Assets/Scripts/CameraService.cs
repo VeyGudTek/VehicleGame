@@ -15,7 +15,7 @@ public class CameraService: MonoBehaviour
     {
         if (Instance != null)
         {
-            throw new Exception("More than one camera script");
+            throw new Exception("Multiple Singletons: [Camera Service]");
         }
         Instance = this;
     }

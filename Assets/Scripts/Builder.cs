@@ -2,32 +2,26 @@ using UnityEngine;
 
 public class Builder : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject partIndicator;
-
-    void Start()
-    {
-        InputService.Instance.RegisterLeftClickListener(OnLeftClick);
-    }
-
     private void Update()
     {
+        ShowIndicator();
+    }
+
+    private void ShowIndicator()
+    {
+        GameObject indicator = BuildIndicator.Instance.Indicator;
+
         if (CameraService.Instance.GetMouseInput(LayerName.Build, out RaycastHit hit))
         {
-            partIndicator.SetActive(true);
-            partIndicator.transform.position = hit.point;
-            partIndicator.transform.LookAt(hit.point + hit.normal);
+            indicator.SetActive(true);
+            indicator.transform.position = hit.point;
+            indicator.transform.LookAt(hit.point + hit.normal);
 
             Debug.Log(hit.normal);
         }
         else
         {
-            partIndicator.SetActive(false);
+            indicator.SetActive(false);
         }
-    }
-
-    private void OnLeftClick()
-    {
-
     }
 }
