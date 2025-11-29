@@ -22,34 +22,30 @@ public class BuildIndicator : MonoBehaviour
 
     private void Start()
     {
-        InputService.Instance.RegisterNextClickListeners(NextIndicator);
-        InputService.Instance.RegisterPreviousClickListners(PreviousIndicator);
-
         foreach (GameObject part in vehicleParts)
         {
             part.SetActive(false);
         }
     }
 
-    private void NextIndicator()
+    private void Update()
     {
-        vehicleParts[currentIndex].SetActive(false);
-        currentIndex++;
-
-        if (currentIndex == vehicleParts.Count)
-        {
-            currentIndex = 0;
-        }
+        ShowIndicator();
     }
 
-    private void PreviousIndicator()
+    private void ShowIndicator()
     {
-        vehicleParts[currentIndex].SetActive(false);
-        currentIndex--;
-
-        if (currentIndex < 0)
+        if (CameraService.Instance.GetMouseInput(LayerName.Build, out RaycastHit hit))
         {
-            currentIndex = vehicleParts.Count - 1;
+            Indicator.SetActive(true);
+            Indicator.transform.position = hit.point;
+            Indicator.transform.LookAt(hit.point + hit.normal);
+
+            Debug.Log(hit.normal);
+        }
+        else
+        {
+            Indicator.SetActive(false);
         }
     }
 }
