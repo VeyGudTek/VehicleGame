@@ -1,15 +1,15 @@
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BuildIndicator : MonoBehaviour
 {
-    [SerializeField]
-    private List<GameObject> vehicleParts = new List<GameObject>();
-    private int currentIndex { get; set; } = 0;
-
     public static BuildIndicator Instance { get; private set; }
-    public GameObject Indicator => vehicleParts[currentIndex];
+
+    [field: SerializeField]
+    private PartObjectDataList PartObjectDataList { get; set; }
+    private int currentIndicatorId { get; set; } = 0;
+    private GameObject Indicator { get; set; }
 
     private void Awake()
     {
@@ -22,10 +22,15 @@ public class BuildIndicator : MonoBehaviour
 
     private void Start()
     {
-        foreach (GameObject part in vehicleParts)
-        {
-            part.SetActive(false);
-        }
+        InputService.Instance.RegisterLeftClickListener(OnLeftClick);
+
+        IntantiateIndicator(currentIndicatorId);
+    }
+
+    private void IntantiateIndicator(int id)
+    {
+        GameObject indicatorToCreate = PartObjectDataList.Data.Where(p => p.Id == id).First().GameObject;
+        Indicator = Instantiate(indicatorToCreate, transform);
     }
 
     private void Update()
@@ -40,12 +45,18 @@ public class BuildIndicator : MonoBehaviour
             Indicator.SetActive(true);
             Indicator.transform.position = hit.point;
             Indicator.transform.LookAt(hit.point + hit.normal);
-
-            Debug.Log(hit.normal);
         }
         else
         {
             Indicator.SetActive(false);
+        }
+    }
+
+    private void OnLeftClick()
+    {
+        if (CameraService.Instance.GetMouseInput(LayerName.Build, out RaycastHit hit))
+        {
+            Builder.Instance.PlaceVehiclePart(hit.collider.gameObject, Indicator, currentIndicatorId);
         }
     }
 }
