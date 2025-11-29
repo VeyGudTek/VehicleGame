@@ -7,8 +7,8 @@ public class Builder : MonoBehaviour
 
     [SerializeField]
     private GameObject Core;
-
     private PersistedPartData Root { get; set; } = new();
+
     private void Awake()
     {
         if (Instance != null)
@@ -32,6 +32,7 @@ public class Builder : MonoBehaviour
 
     public void PlaceVehiclePart(GameObject parent, GameObject child, int partId)
     {
-        
+        GameObject newPart = Instantiate(child, child.transform.position, child.transform.rotation, parent.transform);
+        newPart.layer = LayerMask.NameToLayer(LayerName.Build.ToString());
     }
 }

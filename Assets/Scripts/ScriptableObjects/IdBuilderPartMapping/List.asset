@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02cd95f5c9eec7645bc848ffb9c084f3, type: 3}
-  m_Name: Mapper
+  m_Name: List
   m_EditorClassIdentifier: 
-  <IdBuilderPartMappings>k__BackingField:
+  <Data>k__BackingField:
   - {fileID: 11400000, guid: 868d8c77b5c87fb4a8e1f83dda815be8, type: 2}

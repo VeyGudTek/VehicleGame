@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: 1BodyMap
   m_EditorClassIdentifier: 
   <Id>k__BackingField: 1
-  <BuilderPart>k__BackingField: {fileID: 5632343596957409918, guid: 5e4e3695637af0845868aac6dd2f9a6a, type: 3}
+  <Type>k__BackingField: 1
+  <GameObject>k__BackingField: {fileID: 2473586857720195313, guid: ab83fd1c0ab9bf540ac70df2655643ba, type: 3}

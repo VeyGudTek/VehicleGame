@@ -8,7 +8,7 @@ public class BuildIndicator : MonoBehaviour
 
     [field: SerializeField]
     private PartObjectDataList PartObjectDataList { get; set; }
-    private int currentIndicatorId { get; set; } = 0;
+    private int currentIndicatorId { get; set; } = 1;
     private GameObject Indicator { get; set; }
 
     private void Awake()
