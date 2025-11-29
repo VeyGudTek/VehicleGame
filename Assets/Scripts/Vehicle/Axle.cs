@@ -11,6 +11,7 @@ public class Axle : MonoBehaviour
 
     private void OnLeftClick()
     {
-        _rigidBody.AddTorque(new Vector3(10f, 0f, 0f));
+        Debug.Log("addforce");
+        _rigidBody.AddRelativeTorque(new Vector3(10f, 10f, 10f));
     }
 }
