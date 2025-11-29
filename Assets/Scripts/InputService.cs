@@ -8,9 +8,10 @@ public class InputService : MonoBehaviour
     public static InputService Instance { get; private set; }
     public bool leftClickEnabled { get; private set; }
 
-    private List<Action> leftClickListeners = new List<Action>();
-    private List<Action> previousClickListeners = new List<Action>();
-    private List<Action> nextClickListeners = new List<Action>();
+    private List<Action> leftClickListeners { get; set; } = new List<Action>();
+    private List<Action> leftClickFixedListeners { get; set; } = new List<Action>();
+    private List<Action> previousClickListeners { get; set; } = new List<Action>();
+    private List<Action> nextClickListeners { get; set; } = new List<Action>();
 
     private InputAction leftClick { get; set; }
     private InputAction next { get; set; }
@@ -65,9 +66,27 @@ public class InputService : MonoBehaviour
         }
     }
 
-    public void RegisterLeftClickListener(Action action)
+    private void FixedUpdate()
     {
-        leftClickListeners.Add(action);
+        if (leftClickEnabled)
+        {
+            foreach(Action action in leftClickFixedListeners)
+            {
+                action.Invoke();
+            }
+        }
+    }
+
+    public void RegisterLeftClickListener(Action action, bool fix = false)
+    {
+        if (!fix)
+        {
+            leftClickListeners.Add(action);
+        }
+        else
+        {
+            leftClickFixedListeners.Add(action);
+        }
     }
 
     public void RegisterNextClickListeners(Action action)
