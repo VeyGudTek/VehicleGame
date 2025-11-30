@@ -7,8 +7,8 @@ public class BuildIndicator : MonoBehaviour
     public static BuildIndicator Instance { get; private set; }
 
     [field: SerializeField]
-    private PartObjectDataList PartObjectDataList { get; set; }
-    private int currentIndicatorId { get; set; } = 1;
+    private PartIndicatorList PartObjectDataList { get; set; }
+    private int currentIndicatorPartId { get; set; } = 1;
     private GameObject Indicator { get; set; }
 
     private void Awake()
@@ -24,12 +24,12 @@ public class BuildIndicator : MonoBehaviour
     {
         InputService.Instance.RegisterLeftClickListener(OnLeftClick);
 
-        IntantiateIndicator(currentIndicatorId);
+        IntantiateIndicator(currentIndicatorPartId);
     }
 
     private void IntantiateIndicator(int id)
     {
-        GameObject indicatorToCreate = PartObjectDataList.Data.Where(p => p.Id == id).First().GameObject;
+        GameObject indicatorToCreate = PartObjectDataList.Data.Where(p => p.PartId == id).First().GameObject;
         Indicator = Instantiate(indicatorToCreate, transform);
     }
 
@@ -56,7 +56,7 @@ public class BuildIndicator : MonoBehaviour
     {
         if (CameraService.Instance.GetMouseInput(LayerName.Build, out RaycastHit hit))
         {
-            Builder.Instance.PlaceVehiclePart(hit.collider.gameObject, Indicator, currentIndicatorId);
+            Builder.Instance.PlaceVehiclePart(Indicator, currentIndicatorPartId);
         }
     }
 }

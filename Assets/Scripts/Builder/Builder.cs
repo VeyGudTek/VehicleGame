@@ -5,9 +5,9 @@ public class Builder : MonoBehaviour
 {
     public static Builder Instance { get; private set; }
 
-    [SerializeField]
-    private GameObject Core;
-    private PersistedPartData Root { get; set; } = new();
+    [field: SerializeField]
+    private Transform PartsParent { get; set; }
+
 
     private void Awake()
     {
@@ -20,19 +20,15 @@ public class Builder : MonoBehaviour
 
     private void Start()
     {
-        InitializeRoot();
+
     }
 
-    private void InitializeRoot()
+    public void PlaceVehiclePart(GameObject child, int partId)
     {
-        Root.Id = 0;
-        Root.Position = Core.transform.position;
-        Root.Rotation = Core.transform.eulerAngles;
-    }
+        GameObject newPartObject = Instantiate(child, child.transform.position, child.transform.rotation, PartsParent);
+        newPartObject.layer = LayerMask.NameToLayer(LayerName.Build.ToString());
 
-    public void PlaceVehiclePart(GameObject parent, GameObject child, int partId)
-    {
-        GameObject newPart = Instantiate(child, child.transform.position, child.transform.rotation, parent.transform);
-        newPart.layer = LayerMask.NameToLayer(LayerName.Build.ToString());
+        BuildPart newPartComonent = newPartObject.AddComponent<BuildPart>();
+        newPartComonent.Initialize(partId);
     }
 }
