@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02cd95f5c9eec7645bc848ffb9c084f3, type: 3}
-  m_Name: PartsList
+  m_Script: {fileID: 11500000, guid: 9704b2d9189f9b24da3a4ba8ee75ae23, type: 3}
+  m_Name: 1BodyCubeMap
   m_EditorClassIdentifier: 
-  <Data>k__BackingField:
-  - {fileID: 11400000, guid: 868d8c77b5c87fb4a8e1f83dda815be8, type: 2}
-  - {fileID: 11400000, guid: 4a1904e076f2bac409c849b59dcf0530, type: 2}
+  <PartId>k__BackingField: 1
+  <Name>k__BackingField: Cube
+  <GameObject>k__BackingField: {fileID: 2473586857720195313, guid: ab83fd1c0ab9bf540ac70df2655643ba, type: 3}

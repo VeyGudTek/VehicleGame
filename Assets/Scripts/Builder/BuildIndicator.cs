@@ -21,13 +21,26 @@ public class BuildIndicator : MonoBehaviour
     {
         InputService.Instance.RegisterLeftClickListener(OnLeftClick);
 
-        IntantiateIndicator(currentIndicatorPartId);
+        InstantiateIndicator();
     }
 
-    private void IntantiateIndicator(int id)
+    private void InstantiateIndicator()
     {
-        GameObject indicatorToCreate = PartDataProvider.Instance.GetPartData().Where(p => p.PartId == id).First().GameObject;
+        GameObject indicatorToCreate = PartDataProvider.Instance.GetPartData()
+            .Where(p => p.PartId == currentIndicatorPartId)
+            .First().GameObject;
+
         Indicator = Instantiate(indicatorToCreate, transform);
+    }
+
+    public void UpdateIndicator(int partId)
+    {
+        GameObject oldIndicator = Indicator;
+
+        currentIndicatorPartId = partId;
+        InstantiateIndicator();
+
+        Destroy(oldIndicator);
     }
 
     private void Update()

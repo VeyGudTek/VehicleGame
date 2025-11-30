@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9704b2d9189f9b24da3a4ba8ee75ae23, type: 3}
-  m_Name: 1BodyMap
+  m_Name: 2BodySphereMap
   m_EditorClassIdentifier: 
-  <PartId>k__BackingField: 1
-  <GameObject>k__BackingField: {fileID: 2473586857720195313, guid: ab83fd1c0ab9bf540ac70df2655643ba, type: 3}
+  <PartId>k__BackingField: 2
+  <Name>k__BackingField: Sphere
+  <GameObject>k__BackingField: {fileID: 4024681565911818545, guid: 617ffdc1911d86046b21b7e1148e83bc, type: 3}
