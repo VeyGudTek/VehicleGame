@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9704b2d9189f9b24da3a4ba8ee75ae23, type: 3}
   m_Name: 1BodyMap
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 1
-  <Type>k__BackingField: 1
+  <PartId>k__BackingField: 1
   <GameObject>k__BackingField: {fileID: 2473586857720195313, guid: ab83fd1c0ab9bf540ac70df2655643ba, type: 3}

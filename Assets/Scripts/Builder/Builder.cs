@@ -20,7 +20,7 @@ public class Builder : MonoBehaviour
 
     private void Start()
     {
-
+        InputService.Instance.RegisterJumpListerners(SaveVehicle);
     }
 
     public void PlaceVehiclePart(GameObject child, int partId)
@@ -30,5 +30,24 @@ public class Builder : MonoBehaviour
 
         BuildPart newPartComonent = newPartObject.AddComponent<BuildPart>();
         newPartComonent.Initialize(partId);
+    }
+
+    public void SaveVehicle()
+    {
+        StoredVehicleData newVehicle = new() { PartData = new() };
+
+        foreach (BuildPart part in PartsParent.GetComponentsInChildren<BuildPart>())
+        {
+            newVehicle.PartData.Add(new StoredPartData()
+            {
+                InstanceId = part.InstanceId.ToString(),
+                PartId = part.PartId,
+                Position = part.transform.position,
+                Rotation = part.transform.eulerAngles,
+                NeighborInstanceId = new()
+            });
+        }
+
+        VehicleRepository.Instance.SaveVehicle(newVehicle, 0);
     }
 }

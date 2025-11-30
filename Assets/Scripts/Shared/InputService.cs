@@ -12,10 +12,12 @@ public class InputService : MonoBehaviour
     private List<Action> leftClickFixedListeners { get; set; } = new List<Action>();
     private List<Action> previousClickListeners { get; set; } = new List<Action>();
     private List<Action> nextClickListeners { get; set; } = new List<Action>();
+    private List<Action> jumpListeners { get; set; } = new List<Action>();
 
     private InputAction leftClick { get; set; }
     private InputAction next { get; set; }
     private InputAction previous { get; set; }
+    private InputAction jump { get; set; }
 
 
     void Awake()
@@ -23,6 +25,7 @@ public class InputService : MonoBehaviour
         leftClick = InputSystem.actions.FindAction("Attack");
         next = InputSystem.actions.FindAction("Next");
         previous = InputSystem.actions.FindAction("Previous");
+        jump = InputSystem.actions.FindAction("Jump");
 
         if (Instance == null)
         {
@@ -64,6 +67,14 @@ public class InputService : MonoBehaviour
                 action.Invoke();
             }
         }
+
+        if (jump.WasPerformedThisFrame())
+        {
+            foreach(Action action in jumpListeners)
+            {
+                action.Invoke();
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -97,5 +108,10 @@ public class InputService : MonoBehaviour
     public void RegisterPreviousClickListners(Action action)
     {
         previousClickListeners.Add(action);
+    }
+
+    public void RegisterJumpListerners(Action action)
+    {
+        jumpListeners.Add(action);
     }
 }
