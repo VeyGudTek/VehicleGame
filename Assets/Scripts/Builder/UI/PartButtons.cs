@@ -7,6 +7,7 @@ public class PartButtons : MonoBehaviour
 {
     [SerializeField]
     private List<Button> PartButtonList = new List<Button>();
+    [SerializeField] TMP_Text SelectedText;
 
     private void Start()
     {
@@ -25,8 +26,15 @@ public class PartButtons : MonoBehaviour
                 break;
             }
 
-            PartButtonList[i].onClick.AddListener(() => BuildIndicator.Instance.UpdateIndicator(partData[localIndex].PartId));
-            PartButtonList[i].GetComponentInChildren<TMP_Text>().text = partData[localIndex].Name;
+            string partName = partData[localIndex].Name;
+            PartButtonList[i].onClick.AddListener(() => OnButtonClick(partData[localIndex].PartId, partName));
+            PartButtonList[i].GetComponentInChildren<TMP_Text>().text = partName;
         }
+    }
+
+    private void OnButtonClick(int partId, string name)
+    {
+        BuildIndicator.Instance.UpdateIndicator(partId);
+        SelectedText.text = $"Selected: {name}";
     }
 }
