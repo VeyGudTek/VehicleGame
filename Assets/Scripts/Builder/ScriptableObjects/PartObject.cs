@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PartIndicator", menuName = "Scriptable Objects/PartIndicator")]
-public class PartIndicator : ScriptableObject
+[CreateAssetMenu(fileName = "PartObject", menuName = "Scriptable Objects/PartObject")]
+public class PartObject : ScriptableObject
 {
     [field: SerializeField]
     public int PartId { get; private set; }

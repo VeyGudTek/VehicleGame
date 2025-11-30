@@ -5,9 +5,6 @@ using UnityEngine;
 public class BuildIndicator : MonoBehaviour
 {
     public static BuildIndicator Instance { get; private set; }
-
-    [field: SerializeField]
-    private PartIndicatorList PartObjectDataList { get; set; }
     private int currentIndicatorPartId { get; set; } = 1;
     private GameObject Indicator { get; set; }
 
@@ -29,7 +26,7 @@ public class BuildIndicator : MonoBehaviour
 
     private void IntantiateIndicator(int id)
     {
-        GameObject indicatorToCreate = PartObjectDataList.Data.Where(p => p.PartId == id).First().GameObject;
+        GameObject indicatorToCreate = PartDataProvider.Instance.GetPartData().Where(p => p.PartId == id).First().GameObject;
         Indicator = Instantiate(indicatorToCreate, transform);
     }
 
