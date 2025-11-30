@@ -6,11 +6,17 @@ public class PartsMenu : MonoBehaviour
     [SerializeField]
     private RectTransform PartsMenuParent;
     [SerializeField]
+    private RectTransform ToggleButton;
     private bool IsOpen = true;
 
     private void Update()
     {
         UpdatePartsMenu();
+    }
+
+    public void OnMenuToggle()
+    {
+        IsOpen = !IsOpen;
     }
 
     private void UpdatePartsMenu()
@@ -24,10 +30,11 @@ public class PartsMenu : MonoBehaviour
             newPosition.x += slideSpeed;
             newPosition.x += (MenuWidth / 2f - PartsMenuParent.anchoredPosition.x) * Time.deltaTime * 5f;
         }
-        if (!IsOpen && PartsMenuParent.anchoredPosition.x > -MenuWidth / 2f)
+        float toggleButtonWidth = ToggleButton.sizeDelta.x;
+        if (!IsOpen && PartsMenuParent.anchoredPosition.x > (-MenuWidth / 2f) + toggleButtonWidth)
         {
             newPosition.x -= slideSpeed;
-            newPosition.x += (-MenuWidth / 2f - PartsMenuParent.anchoredPosition.x) * Time.deltaTime * 5f;
+            newPosition.x += (-MenuWidth / 2f - PartsMenuParent.anchoredPosition.x + toggleButtonWidth) * Time.deltaTime * 5f;
         }
         newPosition.x = Mathf.Clamp(newPosition.x, -MenuWidth / 2f, MenuWidth / 2f);
 
